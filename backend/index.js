@@ -6,8 +6,6 @@ const httpStatus = require("http-status");
 const globalErrorHandler = require("./src/Middleware/globalErrorHandler");
 const router = require("./src/routes");
 
-const session = require("express-session");
-const config = require("./src/config/config");
 const createCorsOptions = require("./src/shared/corsOptions");
 const allowedOrigins = require("./src/constant/corsOrigin");
 const bodyParser = require("body-parser");
