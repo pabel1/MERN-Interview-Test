@@ -8,6 +8,7 @@ const HomePage = () => {
         <div>
           <HomePageBanner />
         </div>
+        
       </div>
     </div>
   );

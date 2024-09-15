@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../../assets/images/images.png";
 const Topbar = () => {
   return (
@@ -6,9 +7,9 @@ const Topbar = () => {
       style={{ zIndex: 99 }}
     >
       <div className="container w-full flex justify-between items-center gap-4 py-2">
-        <div className="flex gap-3 items-center">
+        <Link to={"/"} className="flex gap-3 items-center">
           <img src={logo} alt="" className=" w-20 " />
-        </div>
+        </Link>
       </div>
     </div>
   );
