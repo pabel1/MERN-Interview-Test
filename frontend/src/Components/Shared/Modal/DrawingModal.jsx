@@ -16,24 +16,25 @@ const DrawingModal = ({
   title = "",
   description = "",
 }) => {
+  console.log(isOpen);
   const { drawingId } = useParams();
   const navigate = useNavigate();
 
-  const mutation = useMutation(drawingId ? editDrawing : saveDrawing, {
-    // onMutate: async (newDrawing) => {
-    //   const previousDrawings = queryClient.getQueryData("drawings");
-    //   queryClient.setQueryData("drawings", newDrawing);
-    //   return { previousDrawings };
-    // },
-    // onSuccess: () => {
-    //   onClose();
-    //   toast.success(`Drawing ${drawingId ? "updated" : "saved"} successfully`);
-    //   navigate("/drawings/explore");
-    // },
-    // onError: (err) => {
-    //   toast.error(err.response?.data?.message || "An error occurred");
-    // },
-  });
+  // const mutation = useMutation(drawingId ? editDrawing : saveDrawing, {
+  //   // onMutate: async (newDrawing) => {
+  //   //   const previousDrawings = queryClient.getQueryData("drawings");
+  //   //   queryClient.setQueryData("drawings", newDrawing);
+  //   //   return { previousDrawings };
+  //   // },
+  //   // onSuccess: () => {
+  //   //   onClose();
+  //   //   toast.success(`Drawing ${drawingId ? "updated" : "saved"} successfully`);
+  //   //   navigate("/drawings/explore");
+  //   // },
+  //   // onError: (err) => {
+  //   //   toast.error(err.response?.data?.message || "An error occurred");
+  //   // },
+  // });
 
   const handleSubmit = (data) => {
     // const payload = {
@@ -51,7 +52,7 @@ const DrawingModal = ({
         as="h3"
         className="text-lg font-medium leading-8 text-gray-900"
       >
-        Enter the Title and Description for your Drawing!
+        Save your Drawing!
       </DialogTitle>
 
       <Form
@@ -104,8 +105,8 @@ const DrawingModal = ({
             Cancel
           </Button>
           <Button
-            disabled={mutation.isLoading}
-            loading={mutation.isLoading}
+            // disabled={mutation.isLoading}
+            // loading={mutation.isLoading}
             type="submit"
           >
             Save

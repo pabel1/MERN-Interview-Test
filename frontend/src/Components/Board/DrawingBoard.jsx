@@ -15,6 +15,7 @@ import {
 
 import Modal from "../Shared/Modal/Modal.jsx";
 import Toolbox from "../Shared/Toolbar/Toolbox.jsx";
+import SaveDraw from "./SaveDraw.jsx";
 
 let newPath = [];
 
@@ -30,6 +31,7 @@ const DrawingBoard = ({ drawing }) => {
   const staticContextRef = useRef(null);
   const [drawingMode, setDrawingMode] = useState("rectangle");
   const [openModal, setOpen] = useState({ saveDrawing: false, text: false });
+  const [openSave, setOpenSave] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -232,8 +234,9 @@ const DrawingBoard = ({ drawing }) => {
     }
   };
 
+  console.log(elements);
   return (
-    <div className=" grid  grid-cols-6 gap-5 justify-center py-8">
+    <div className=" grid  grid-cols-6 gap-5  justify-center py-8">
       <div className=" col-span-1 flex flex-col items-center justify-center w-full">
         <Toolbox
           onModeChange={(mode) => {
@@ -247,16 +250,8 @@ const DrawingBoard = ({ drawing }) => {
           }}
         />
       </div>
-      <div className="border rounded-xl  bg-gray-50 col-span-5 flex flex-col items-center relative p-4">
-        {/* <div className=" mt-4 sticky z-50 flex flex-col md:flex-row items-center md:items-end justify-between w-full">
-          <Button
-            disabled={!elements?.length}
-            onClick={() => setOpen((prev) => ({ ...prev, saveDrawing: true }))}
-            className="sticky z-50 min-w-max mr-4"
-          >
-            Save Changes
-          </Button>
-        </div> */}
+
+      <div className="border rounded-xl  bg-gray-50 col-span-4 flex flex-col items-center relative p-4">
         {drawingMode === "text" && (
           <Modal
             isOpen={openModal.text}
@@ -289,14 +284,13 @@ const DrawingBoard = ({ drawing }) => {
             text ? "cursor-text" : "cursor-crosshair"
           }`}
         />
-
-        {/* <DrawingModal
-        isOpen={openModal.saveDrawing}
-        close={() => setOpen((prev) => ({ ...prev, saveDrawing: true }))}
-        elements={elements}
-        // title={drawing?.title}
-        // description={drawing?.description}
-      /> */}
+      </div>
+      <div
+        className={`${
+          elements.length ? "flex" : "hidden"
+        } col-span-1  sticky z-50  flex-col gap-2  items-start  w-full`}
+      >
+        <SaveDraw />
       </div>
     </div>
   );

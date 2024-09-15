@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 const buttonClassesMap = {
   common:
     "inline-flex relative py-2 px-4 border shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2",
-  primary:
-    "border-transparent rounded text-white bg-primary hover:bg-red-700 focus:bg-red-700 disabled:bg-red-100 disabled:text-gray-300",
+  primary: "border-transparent rounded text-black bg-white  ",
   secondary:
     "border-gray-300 rounded text-gray-900 bg-transparent hover:bg-gray-100 focus:ring-gray-200 disabled:bg-gray-200 disabled:text-gray-300",
 };

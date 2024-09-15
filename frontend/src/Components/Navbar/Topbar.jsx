@@ -3,7 +3,7 @@ import logo from "../../assets/images/images.png";
 const Topbar = () => {
   return (
     <div
-      className="bg-gradient-to-r from-rose-50 to-rose-50 flex justify-between items-center  py-3 px-6 sticky top-0"
+      className="bg-gradient-to-r from-track-white  to-track-white  flex justify-between items-center  py-3 px-6 sticky top-0 shadow-sm"
       style={{ zIndex: 99 }}
     >
       <div className="container w-full flex justify-between items-center gap-4 py-2">

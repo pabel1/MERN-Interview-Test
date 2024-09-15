@@ -63,8 +63,10 @@ const drawSchema = Joi.object({
   }),
 });
 
-module.exports = {
+const JoiValidationSchema = {
   coordinatesSchema,
   shapeSchema,
   drawSchema,
 };
+
+module.exports = JoiValidationSchema;
