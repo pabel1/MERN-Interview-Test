@@ -27,6 +27,11 @@ router.delete(
 
   drawController.deleteDraw
 );
+router.patch(
+  "/draw-update/:id",
+
+  drawController.updateDraw
+);
 
 const drawRouter = router;
 

@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { useCreateDrawMutation } from "../../feature/draw/drawApiSlice";
+import {
+  useCreateDrawMutation,
+  useUpdateDrawMutation,
+} from "../../feature/draw/drawApiSlice";
 import { Form } from "../Shared/Form/Form";
 import { FormField } from "../Shared/Form/FormField";
 
-const SaveDraw = ({ elements }) => {
+const SaveDraw = ({ elements, title, description, id }) => {
   const navigate = useNavigate();
   const [createDraw] = useCreateDrawMutation() || {};
+  const [updateDraw] = useUpdateDrawMutation() || {};
   const [formData, setFormData] = useState({
-    title: "",
-    description: "",
+    title: title ? title : "",
+    description: description ? description : "",
   });
 
   const handleChange = (e) => {
@@ -23,12 +27,26 @@ const SaveDraw = ({ elements }) => {
 
   const handleSubmit = async (data, form) => {
     if (elements?.length && formData) {
-      const res = await createDraw({
-        title: formData.title,
-        description: formData.description,
-        elements,
-      });
-
+      let res;
+      if (id) {
+        const data = {
+          title: formData.title,
+          description: formData.description,
+          elements,
+        };
+        console.log(elements);
+        res = await updateDraw({
+          id,
+          data,
+        });
+      } else {
+        res = await createDraw({
+          title: formData.title,
+          description: formData.description,
+          elements,
+        });
+      }
+      console.log(res);
       if (res.error) {
         console.log("first");
         toast.error("Failed to save the drawing.");
@@ -98,7 +116,7 @@ const SaveDraw = ({ elements }) => {
           type="submit"
           className="sticky z-50 min-w-max mr-4 shadow border-2 border-red-100 hover:bg-gray-100 rounded-lg cursor-pointer py-2 px-6"
         >
-          Save Changes
+          {id ? " Update Changes" : "Save Changes"}
         </button>
       </Form>
     </div>

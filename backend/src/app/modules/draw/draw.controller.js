@@ -45,9 +45,25 @@ const deleteDraw = catchAsyncError(async (req, res) => {
   const result = await drawService.deleteDrawFromDB(req.params);
 
   sendResponse(res, {
-    statusCode: httpStatus.CREATED,
+    statusCode: httpStatus.OK,
     success: true,
     message: "Drawing Deleted successfully",
+    data: {
+      result,
+    },
+  });
+});
+const updateDraw = catchAsyncError(async (req, res) => {
+  const payload = {
+    id: req.params,
+    newDraw: req.body,
+  };
+  const result = await drawService.updateDrawIntoDB(payload);
+
+  sendResponse(res, {
+    statusCode: httpStatus.CREATED,
+    success: true,
+    message: "Drawing Updated successfully",
     data: {
       result,
     },
@@ -59,5 +75,6 @@ const drawController = {
   getAllDraw,
   getSingleDraw,
   deleteDraw,
+  updateDraw,
 };
 module.exports = drawController;

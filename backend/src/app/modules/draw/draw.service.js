@@ -32,12 +32,24 @@ const deleteDrawFromDB = async (payload) => {
   return draw;
 };
 
+const updateDrawIntoDB = async (payload) => {
+  const { id, newDraw } = payload || {};
+  const draw = DrawModel.findByIdAndUpdate(id, newDraw, { new: true });
+  if (!draw) {
+    throw new ErrorHandler(
+      `${id} this Drawing Not Found!!`,
+      httpStatus.NOT_FOUND
+    );
+  }
+  return draw;
+};
+
 const drawService = {
   createDrawIntoDB,
   allDrawsFromDB,
-
   singleDraw,
   deleteDrawFromDB,
+  updateDrawIntoDB,
 };
 
 module.exports = drawService;

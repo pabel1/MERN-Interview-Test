@@ -70,54 +70,61 @@ const DrawingBoard = ({ drawing }) => {
   }, [color]);
 
   useEffect(() => {
-    if (elements.length) {
+    const { elements } = drawing || {};
+    if (Array.isArray(elements) && elements.length > 0) {
       elements.forEach((element) => {
-        const { type, properties } = element;
+        const { type, properties } = element || {};
         const { coordinates, color, thickness, content } = properties || {};
 
-        if (contextRef.current) {
-          contextRef.current.strokeStyle = color;
-          contextRef.current.lineWidth = thickness;
-        }
-
-        coordinates.forEach((coordPair) => {
-          const params = {
-            x: coordPair[1]?.x,
-            y: coordPair[1]?.y,
-            contextRef,
-            startPoint: { current: coordPair[0] },
-            shouldClear: false,
-          };
-
-          switch (type) {
-            case "rectangle":
-              drawRectangle(params);
-              break;
-            case "diamond":
-              drawDiamond(params);
-              break;
-            case "circle":
-              drawCircle(params);
-              break;
-            case "line":
-              drawLine(params);
-              break;
-            case "arrow":
-              drawArrow(params);
-              break;
-            case "pencil":
-              drawPencil(params);
-              break;
-            case "text":
-              renderDynamicText({ ...params, text: content, color });
-              break;
-            default:
-              break;
+        if (Array.isArray(coordinates)) {
+          // Set color and thickness
+          if (contextRef.current) {
+            contextRef.current.strokeStyle = color || "#000000";
+            contextRef.current.lineWidth = thickness || 1;
           }
-        });
+
+          coordinates.forEach((coordPair) => {
+            if (coordPair && coordPair.length >= 2) {
+              const params = {
+                x: coordPair[1]?.x,
+                y: coordPair[1]?.y,
+                contextRef,
+                startPoint: { current: coordPair[0] },
+                shouldClear: false,
+              };
+
+              // Draw the appropriate shape
+              switch (type) {
+                case "rectangle":
+                  drawRectangle(params);
+                  break;
+                case "diamond":
+                  drawDiamond(params);
+                  break;
+                case "circle":
+                  drawCircle(params);
+                  break;
+                case "line":
+                  drawLine(params);
+                  break;
+                case "arrow":
+                  drawArrow(params);
+                  break;
+                case "pencil":
+                  drawPencil(params);
+                  break;
+                case "text":
+                  renderDynamicText({ ...params, text: content, color });
+                  break;
+                default:
+                  break;
+              }
+            }
+          });
+        }
       });
     }
-  }, [elements]);
+  }, [drawing]);
 
   const startDrawing = (e) => {
     const { offsetX, offsetY } = e.nativeEvent;
@@ -289,7 +296,12 @@ const DrawingBoard = ({ drawing }) => {
           elements.length ? "flex" : "hidden"
         } col-span-1  sticky z-50  flex-col gap-2  items-start  w-full`}
       >
-        <SaveDraw elements={elements} />
+        <SaveDraw
+          elements={elements}
+          title={drawing?.title}
+          description={drawing?.description}
+          id={drawing?._id}
+        />
       </div>
     </div>
   );

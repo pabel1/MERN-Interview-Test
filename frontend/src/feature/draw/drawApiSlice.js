@@ -56,6 +56,27 @@ export const drawApiSlice = apiSlice.injectEndpoints({
       },
       invalidatesTags: ["draw"],
     }),
+
+    updateDraw: builder.mutation({
+      query: ({ id, data }) => {
+        const { title, description, elements } = data || {};
+
+        console.log(id);
+        console.log(data);
+
+        const drawingData = transformDrawingData(title, description, elements);
+        console.log(drawingData);
+        return {
+          url: `/draw/draw-update/${id}`,
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+          body: drawingData,
+        };
+      },
+      invalidatesTags: ["draw"],
+    }),
   }),
 });
 
@@ -64,4 +85,5 @@ export const {
   useCreateDrawMutation,
   useSingleDrawQuery,
   useDeleteDrawMutation,
+  useUpdateDrawMutation,
 } = drawApiSlice;

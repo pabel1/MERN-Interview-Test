@@ -1,4 +1,5 @@
 export const transformDrawingData = (title, description, elements) => {
+  console.log(elements);
   return {
     title,
     description,

@@ -22,6 +22,7 @@ const DrawingCard = ({ drawing }) => {
     if (res.error) {
       toast.error("Something Went Wrong!!");
     } else {
+      navigate(`/all-draws`);
       toast.success("Drawing Deleted Successfull");
     }
   };
