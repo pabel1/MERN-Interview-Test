@@ -15,12 +15,22 @@ const coordinatesSchema = Joi.object({
 // Shape schema
 const shapeSchema = Joi.object({
   type: Joi.string()
-    .valid("line", "rectangle", "circle", "text")
+    .valid(
+      "line",
+      "rectangle",
+      "circle",
+      "text",
+      "pencil",
+      "arrow",
+      "star",
+      "triangle",
+      "diamond"
+    )
     .required()
     .messages({
       "string.base": "Type must be a string",
       "any.only":
-        "Type must be one of the following: line, rectangle, circle, text",
+        "Type must be one of the following: line , rectangle ,circle , text , pencil , arrow , star ,triangle , diamond ",
       "any.required": "Type is required",
     }),
   color: Joi.string().default("#000000").messages({
@@ -29,9 +39,7 @@ const shapeSchema = Joi.object({
   thickness: Joi.number().default(1).messages({
     "number.base": "Thickness must be a number",
   }),
-  content: Joi.string().default("").messages({
-    "string.base": "Content must be a string",
-  }),
+  content: Joi.string().default(null),
   font: Joi.string().default("").messages({
     "string.base": "Font must be a string",
   }),

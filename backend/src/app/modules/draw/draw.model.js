@@ -18,7 +18,17 @@ const ShapeSchema = new mongoose.Schema(
   {
     type: {
       type: String,
-      enum: ["line", "rectangle", "circle", "text"],
+      enum: [
+        "line",
+        "rectangle",
+        "circle",
+        "text",
+        "pencil",
+        "arrow",
+        "star",
+        "triangle",
+        "diamond",
+      ],
       required: true,
     },
 
@@ -32,7 +42,7 @@ const ShapeSchema = new mongoose.Schema(
     },
     content: {
       type: String,
-      default: "",
+      default: null,
     },
     font: {
       type: String,

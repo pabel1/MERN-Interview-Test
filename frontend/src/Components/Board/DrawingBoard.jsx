@@ -234,7 +234,6 @@ const DrawingBoard = ({ drawing }) => {
     }
   };
 
-  console.log(elements);
   return (
     <div className=" grid  grid-cols-6 gap-5  justify-center py-8">
       <div className=" col-span-1 flex flex-col items-center justify-center w-full">
@@ -290,7 +289,7 @@ const DrawingBoard = ({ drawing }) => {
           elements.length ? "flex" : "hidden"
         } col-span-1  sticky z-50  flex-col gap-2  items-start  w-full`}
       >
-        <SaveDraw />
+        <SaveDraw elements={elements} />
       </div>
     </div>
   );

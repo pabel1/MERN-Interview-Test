@@ -4,7 +4,7 @@ import Main from "../Layout/Main";
 import EditDraw from "../Pages/EditDraw/EditDraw";
 import NotFoundPage from "../Pages/ErrorPage/NotFoundPage";
 import HomePage from "../Pages/HomePage/HomePage";
-import AllDraw from "../Pages/ListOFDraw/AllDraw";
+import ShowDraw from "../Pages/ShowDraw/ShowDraw";
 import StartDraw from "../Pages/StartDraw/StartDraw";
 
 export const routes = createBrowserRouter([
@@ -26,7 +26,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/all-draws",
-        element: <AllDraw />,
+        element: <ShowDraw />,
       },
     ],
   },
