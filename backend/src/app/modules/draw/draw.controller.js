@@ -29,9 +29,35 @@ const getAllDraw = catchAsyncError(async (req, res) => {
     },
   });
 });
+const getSingleDraw = catchAsyncError(async (req, res) => {
+  const result = await drawService.singleDraw(req.params);
+
+  sendResponse(res, {
+    statusCode: httpStatus.CREATED,
+    success: true,
+    message: "Drawing created successfully",
+    data: {
+      result,
+    },
+  });
+});
+const deleteDraw = catchAsyncError(async (req, res) => {
+  const result = await drawService.deleteDrawFromDB(req.params);
+
+  sendResponse(res, {
+    statusCode: httpStatus.CREATED,
+    success: true,
+    message: "Drawing Deleted successfully",
+    data: {
+      result,
+    },
+  });
+});
 
 const drawController = {
   createDraw,
   getAllDraw,
+  getSingleDraw,
+  deleteDraw,
 };
 module.exports = drawController;

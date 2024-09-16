@@ -3,14 +3,17 @@ import DrawingCard from "../../Components/Card/DrawingCard";
 import { useAllDrawsQuery } from "../../feature/draw/drawApiSlice";
 
 const ShowDraw = () => {
-  const { data } = useAllDrawsQuery() || {};
+  const { data, isLoading, isError, isSuccess } = useAllDrawsQuery() || {};
 
-  const { result } = data?.data || {};
+  let content = null;
+  if (!isLoading && isSuccess && !isError && data) {
+    const { result } = data.data || {};
+    content = result.map((item, i) => <DrawingCard drawing={item} key={i} />);
+  }
 
   return (
     <div className="container grid grid-cols-2 items-center justify-center gap-4 my-4">
-      {result &&
-        result.map((item, i) => <DrawingCard drawing={item} key={i} />)}
+      {content}
     </div>
   );
 };

@@ -106,7 +106,7 @@ const DrawingPreview = ({ drawing = { elements: [] } }) => {
   }, [elements]);
 
   return (
-    <div className="w-full">
+    <div className="w-full  ">
       <canvas ref={canvasRef} className="w-full" />
     </div>
   );

@@ -17,6 +17,16 @@ router.get(
 
   drawController.getAllDraw
 );
+router.get(
+  "/single-draw/:id",
+
+  drawController.getSingleDraw
+);
+router.delete(
+  "/draw/:id",
+
+  drawController.deleteDraw
+);
 
 const drawRouter = router;
 

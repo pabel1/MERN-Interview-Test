@@ -5,6 +5,7 @@ import EditDraw from "../Pages/EditDraw/EditDraw";
 import NotFoundPage from "../Pages/ErrorPage/NotFoundPage";
 import HomePage from "../Pages/HomePage/HomePage";
 import ShowDraw from "../Pages/ShowDraw/ShowDraw";
+import SingleDraw from "../Pages/SingleDraw/SingleDraw";
 import StartDraw from "../Pages/StartDraw/StartDraw";
 
 export const routes = createBrowserRouter([
@@ -21,7 +22,11 @@ export const routes = createBrowserRouter([
         element: <StartDraw />,
       },
       {
-        path: "/edit-draw:id",
+        path: "/draw/:id",
+        element: <SingleDraw />,
+      },
+      {
+        path: "/edit-draw/:id",
         element: <EditDraw />,
       },
       {

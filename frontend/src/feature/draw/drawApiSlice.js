@@ -18,7 +18,7 @@ export const drawApiSlice = apiSlice.injectEndpoints({
         };
       },
 
-      providesTags: ["draw"],
+      invalidatesTags: ["draw"],
     }),
     allDraws: builder.query({
       query: () => {
@@ -32,7 +32,36 @@ export const drawApiSlice = apiSlice.injectEndpoints({
       },
       providesTags: ["draw"],
     }),
+    singleDraw: builder.query({
+      query: ({ id }) => {
+        return {
+          url: `/draw/single-draw/${id}`,
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+        };
+      },
+      providesTags: ["draw"],
+    }),
+    deleteDraw: builder.mutation({
+      query: ({ id }) => {
+        return {
+          url: `/draw/draw/${id}`,
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+        };
+      },
+      invalidatesTags: ["draw"],
+    }),
   }),
 });
 
-export const { useAllDrawsQuery, useCreateDrawMutation } = drawApiSlice;
+export const {
+  useAllDrawsQuery,
+  useCreateDrawMutation,
+  useSingleDrawQuery,
+  useDeleteDrawMutation,
+} = drawApiSlice;
