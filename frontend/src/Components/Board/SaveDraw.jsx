@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { useCreateDrawMutation } from "../../feature/draw/drawApiSlice";
 import { Form } from "../Shared/Form/Form";
 import { FormField } from "../Shared/Form/FormField";
 
 const SaveDraw = ({ elements }) => {
+  const navigate = useNavigate();
   const [createDraw] = useCreateDrawMutation() || {};
   const [formData, setFormData] = useState({
     title: "",
@@ -18,22 +21,31 @@ const SaveDraw = ({ elements }) => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    console.log(formData);
-    console.log(e);
-    console.log(elements);
-    const res = await createDraw({
-      title: formData.title,
-      description: formData.description,
-      elements,
-    });
-    console.log(res);
+  const handleSubmit = async (data, form) => {
+    if (elements?.length && formData) {
+      const res = await createDraw({
+        title: formData.title,
+        description: formData.description,
+        elements,
+      });
+
+      if (res.error) {
+        console.log("first");
+        toast.error("Failed to save the drawing.");
+      } else {
+        toast.success("Drawing saved successfully!");
+        navigate("/all-draws");
+      }
+    } else {
+      toast.error("Please add elements before saving!");
+    }
   };
 
   return (
     <div className="space-y-2 ">
       {" "}
       <Form
+        model={formData}
         onSubmit={handleSubmit}
         className="flex flex-col items-center justify-center px-2 md:px-0  space-y-4"
       >
@@ -50,7 +62,7 @@ const SaveDraw = ({ elements }) => {
                 }`}
               />
               {errors && (
-                <p className="text-xs text-error-red capitalize">
+                <p className="text-xs text-red-600 capitalize">
                   {errors.message}
                 </p>
               )}
@@ -72,7 +84,7 @@ const SaveDraw = ({ elements }) => {
                 }`}
               />
               {errors && (
-                <p className="text-xs text-error-red capitalize">
+                <p className="text-xs text-red-600 capitalize">
                   {errors.message}
                 </p>
               )}

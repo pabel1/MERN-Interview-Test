@@ -6,7 +6,7 @@ export const drawApiSlice = apiSlice.injectEndpoints({
     createDraw: builder.mutation({
       query: (data) => {
         const { title, description, elements } = data;
-        console.log("hembhai", data);
+        // console.log("hembhai", data);
         const drawingData = transformDrawingData(title, description, elements);
         return {
           url: `/draw/create`,

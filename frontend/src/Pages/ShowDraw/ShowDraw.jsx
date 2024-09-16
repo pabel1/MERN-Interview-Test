@@ -6,9 +6,9 @@ const ShowDraw = () => {
   const { data } = useAllDrawsQuery() || {};
 
   const { result } = data?.data || {};
-  console.log(result);
+
   return (
-    <div className=" container grid grid-cols-4 items-center justify-center gap-2">
+    <div className="container grid grid-cols-2 items-center justify-center gap-4 my-4">
       {result &&
         result.map((item, i) => <DrawingCard drawing={item} key={i} />)}
     </div>
